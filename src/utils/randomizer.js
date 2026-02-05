@@ -1,6 +1,7 @@
 import classData from '../data/classes.json';
 import archetypeData from '../data/archetypes.json';
 import challengeData from '../data/challenges.json';
+import overclockData from '../data/overclocks.json';
 
 /**
  * Shuffle array using Fisher-Yates algorithm
@@ -31,6 +32,36 @@ function randomPickExcluding(array, excludeName) {
 }
 
 /**
+ * Get an overclock for a weapon based on the mode
+ * @param {string} weaponName - Name of the weapon
+ * @param {string} mode - 'balanced', 'meta', or 'unhinged'
+ * @returns {Object|null} Selected overclock or null if none available
+ */
+function getOverclock(weaponName, mode) {
+  const weaponOverclocks = overclockData.overclocks[weaponName];
+  if (!weaponOverclocks) return null;
+
+  let available;
+  if (mode === 'unhinged') {
+    // Unhinged mode: prefer unhinged, but can pick anything
+    const unhingedOCs = weaponOverclocks.filter(oc => oc.tier === 'unhinged');
+    available = unhingedOCs.length > 0 ? unhingedOCs : weaponOverclocks;
+  } else if (mode === 'meta') {
+    // Meta mode: prefer meta, fallback to balanced
+    const metaOCs = weaponOverclocks.filter(oc => oc.tier === 'meta');
+    const balancedOCs = weaponOverclocks.filter(oc => oc.tier === 'balanced');
+    available = metaOCs.length > 0 ? metaOCs : balancedOCs;
+  } else {
+    // Balanced mode: only balanced overclocks
+    const balancedOCs = weaponOverclocks.filter(oc => oc.tier === 'balanced');
+    available = balancedOCs.length > 0 ? balancedOCs : weaponOverclocks;
+  }
+
+  const selected = randomPick(available);
+  return { ...selected, weaponName };
+}
+
+/**
  * Get weapons that match an archetype for a class/slot
  */
 function getArchetypeWeapons(classId, slotType, archetype, weapons) {
@@ -49,7 +80,7 @@ function getArchetypeWeapons(classId, slotType, archetype, weapons) {
 /**
  * Generate a loadout for a single class
  */
-function generateLoadout(classInfo, archetype = null) {
+function generateLoadout(classInfo, archetype = null, overclockMode = null) {
   let primary, secondary, grenade;
 
   if (archetype) {
@@ -67,6 +98,15 @@ function generateLoadout(classInfo, archetype = null) {
     grenade = randomPick(classInfo.grenades);
   }
 
+  // Add overclocks if mode is specified
+  let primaryOverclock = null;
+  let secondaryOverclock = null;
+
+  if (overclockMode) {
+    primaryOverclock = getOverclock(primary.name, overclockMode);
+    secondaryOverclock = getOverclock(secondary.name, overclockMode);
+  }
+
   return {
     class: classInfo,
     archetype: archetype,
@@ -77,6 +117,9 @@ function generateLoadout(classInfo, archetype = null) {
     secondary,
     grenade,
     traversalTool: classInfo.traversalTool,
+    primaryOverclock,
+    secondaryOverclock,
+    overclockMode,
   };
 }
 
@@ -86,9 +129,10 @@ function generateLoadout(classInfo, archetype = null) {
  * @param {boolean} allowDuplicates - Whether to allow duplicate classes
  * @param {Array} playerNames - Array of player names
  * @param {boolean} useArchetypes - Whether to assign archetypes
+ * @param {string|null} overclockMode - 'balanced', 'meta', 'unhinged', or null
  * @returns {Array} Array of player loadouts
  */
-export function generateRun(playerCount, allowDuplicates, playerNames = [], useArchetypes = false) {
+export function generateRun(playerCount, allowDuplicates, playerNames = [], useArchetypes = false, overclockMode = null) {
   const classes = classData.classes;
   const archetypes = archetypeData.archetypes;
   let selectedClasses;
@@ -109,7 +153,7 @@ export function generateRun(playerCount, allowDuplicates, playerNames = [], useA
       id: `player-${index}`,
       playerNumber: index + 1,
       playerName: playerNames[index] || `Player ${index + 1}`,
-      ...generateLoadout(classInfo, archetype),
+      ...generateLoadout(classInfo, archetype, overclockMode),
     };
   });
 }
@@ -123,6 +167,7 @@ export function generateRun(playerCount, allowDuplicates, playerNames = [], useA
 export function rerollSlot(loadout, slotType) {
   const classInfo = loadout.class;
   const archetype = loadout.archetype;
+  const overclockMode = loadout.overclockMode;
   const currentValue = loadout[slotType];
 
   let weaponPool;
@@ -148,9 +193,56 @@ export function rerollSlot(loadout, slotType) {
 
   const newValue = randomPickExcluding(weaponPool, currentValue.name);
 
-  return {
+  // Update overclock if applicable
+  const result = {
     ...loadout,
     [slotType]: newValue,
+  };
+
+  if (overclockMode && (slotType === 'primary' || slotType === 'secondary')) {
+    const overclockKey = slotType === 'primary' ? 'primaryOverclock' : 'secondaryOverclock';
+    result[overclockKey] = getOverclock(newValue.name, overclockMode);
+  }
+
+  return result;
+}
+
+/**
+ * Reroll just the overclock for a weapon slot
+ * @param {Object} loadout - The current loadout
+ * @param {string} slotType - 'primary' or 'secondary'
+ * @returns {Object} Updated loadout with new overclock
+ */
+export function rerollOverclock(loadout, slotType) {
+  const overclockMode = loadout.overclockMode;
+  if (!overclockMode) return loadout;
+
+  const weaponName = slotType === 'primary' ? loadout.primary.name : loadout.secondary.name;
+  const overclockKey = slotType === 'primary' ? 'primaryOverclock' : 'secondaryOverclock';
+  const currentOC = loadout[overclockKey];
+
+  // Get a different overclock
+  const weaponOverclocks = overclockData.overclocks[weaponName] || [];
+  let available;
+
+  if (overclockMode === 'unhinged') {
+    const unhingedOCs = weaponOverclocks.filter(oc => oc.tier === 'unhinged' && oc.name !== currentOC?.name);
+    available = unhingedOCs.length > 0 ? unhingedOCs : weaponOverclocks.filter(oc => oc.name !== currentOC?.name);
+  } else if (overclockMode === 'meta') {
+    const metaOCs = weaponOverclocks.filter(oc => oc.tier === 'meta' && oc.name !== currentOC?.name);
+    available = metaOCs.length > 0 ? metaOCs : weaponOverclocks.filter(oc => oc.name !== currentOC?.name);
+  } else {
+    const balancedOCs = weaponOverclocks.filter(oc => oc.tier === 'balanced' && oc.name !== currentOC?.name);
+    available = balancedOCs.length > 0 ? balancedOCs : weaponOverclocks.filter(oc => oc.name !== currentOC?.name);
+  }
+
+  if (available.length === 0) available = weaponOverclocks;
+
+  const newOC = randomPick(available);
+
+  return {
+    ...loadout,
+    [overclockKey]: { ...newOC, weaponName },
   };
 }
 
@@ -183,10 +275,10 @@ export function rerollClass(loadout, currentLoadouts, allowDuplicates) {
 
   const newClass = randomPick(availableClasses);
 
-  // Keep the same archetype if one was assigned
+  // Keep the same archetype and overclock mode if assigned
   return {
     ...loadout,
-    ...generateLoadout(newClass, loadout.archetype),
+    ...generateLoadout(newClass, loadout.archetype, loadout.overclockMode),
   };
 }
 
@@ -286,4 +378,4 @@ export function rerollChallenges(count, loadouts, currentChallenges = []) {
   }).filter(c => !c.skipped);
 }
 
-export { classData, archetypeData, challengeData };
+export { classData, archetypeData, challengeData, overclockData };

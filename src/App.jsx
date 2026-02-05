@@ -3,14 +3,16 @@ import PlayerInput from './components/PlayerInput';
 import GenerateButton from './components/GenerateButton';
 import ResultsDisplay from './components/ResultsDisplay';
 import ChallengeDisplay from './components/ChallengeDisplay';
+import TeamAnalysis from './components/TeamAnalysis';
 import RerollAnimation from './components/RerollAnimation';
-import { generateRun, rerollSlot, rerollClass, rerollArchetype, selectChallenges, rerollChallenges } from './utils/randomizer';
+import { generateRun, rerollSlot, rerollClass, rerollArchetype, rerollOverclock, selectChallenges, rerollChallenges } from './utils/randomizer';
 
 function App() {
   const [playerCount, setPlayerCount] = useState(4);
   const [allowDuplicates, setAllowDuplicates] = useState(false);
   const [useArchetypes, setUseArchetypes] = useState(false);
   const [useChallenges, setUseChallenges] = useState(false);
+  const [overclockMode, setOverclockMode] = useState(null);
   const [playerNames, setPlayerNames] = useState(['', '', '', '']);
   const [loadouts, setLoadouts] = useState([]);
   const [challenges, setChallenges] = useState([]);
@@ -22,7 +24,7 @@ function App() {
     const names = playerNames.slice(0, playerCount).map(
       (name, i) => name.trim() || `Player ${i + 1}`
     );
-    const newLoadouts = generateRun(playerCount, allowDuplicates, names, useArchetypes);
+    const newLoadouts = generateRun(playerCount, allowDuplicates, names, useArchetypes, overclockMode);
     setLoadouts(newLoadouts);
 
     // Generate challenges if enabled
@@ -33,7 +35,7 @@ function App() {
     } else {
       setChallenges([]);
     }
-  }, [playerCount, allowDuplicates, playerNames, useArchetypes, useChallenges]);
+  }, [playerCount, allowDuplicates, playerNames, useArchetypes, useChallenges, overclockMode]);
 
   const handleGenerate = () => {
     setIsLoading(true);
@@ -75,6 +77,14 @@ function App() {
     setLoadouts((current) =>
       current.map((loadout) =>
         loadout.id === playerId ? rerollArchetype(loadout) : loadout
+      )
+    );
+  };
+
+  const handleRerollOverclock = (playerId, slotType) => {
+    setLoadouts((current) =>
+      current.map((loadout) =>
+        loadout.id === playerId ? rerollOverclock(loadout, slotType) : loadout
       )
     );
   };
@@ -126,6 +136,8 @@ function App() {
             setUseArchetypes={setUseArchetypes}
             useChallenges={useChallenges}
             setUseChallenges={setUseChallenges}
+            overclockMode={overclockMode}
+            setOverclockMode={setOverclockMode}
             playerNames={playerNames}
             setPlayerNames={setPlayerNames}
           />
@@ -149,12 +161,16 @@ function App() {
             onRerollAll={handleRerollAllChallenges}
           />
 
+          {/* Team Analysis */}
+          <TeamAnalysis loadouts={loadouts} />
+
           {/* Loadouts */}
           <ResultsDisplay
             loadouts={loadouts}
             onRerollSlot={handleRerollSlot}
             onRerollClass={handleRerollClass}
             onRerollArchetype={handleRerollArchetype}
+            onRerollOverclock={handleRerollOverclock}
           />
         </div>
       )}

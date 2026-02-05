@@ -1,3 +1,10 @@
+const OVERCLOCK_MODES = [
+  { id: null, label: 'Off', icon: '✗' },
+  { id: 'balanced', label: 'Balanced', icon: '⚖️', color: 'bg-green-600 border-green-500' },
+  { id: 'meta', label: 'Meta', icon: '🏆', color: 'bg-yellow-600 border-yellow-500' },
+  { id: 'unhinged', label: 'Unhinged', icon: '🤪', color: 'bg-pink-600 border-pink-500' },
+];
+
 function PlayerInput({
   playerCount,
   setPlayerCount,
@@ -7,6 +14,8 @@ function PlayerInput({
   setUseArchetypes,
   useChallenges,
   setUseChallenges,
+  overclockMode,
+  setOverclockMode,
   playerNames,
   setPlayerNames
 }) {
@@ -15,6 +24,14 @@ function PlayerInput({
     newNames[index] = name;
     setPlayerNames(newNames);
   };
+
+  const cycleOverclockMode = () => {
+    const currentIndex = OVERCLOCK_MODES.findIndex(m => m.id === overclockMode);
+    const nextIndex = (currentIndex + 1) % OVERCLOCK_MODES.length;
+    setOverclockMode(OVERCLOCK_MODES[nextIndex].id);
+  };
+
+  const currentOCMode = OVERCLOCK_MODES.find(m => m.id === overclockMode) || OVERCLOCK_MODES[0];
 
   return (
     <div className="flex flex-col gap-6 items-center w-full">
@@ -96,6 +113,32 @@ function PlayerInput({
             {useChallenges ? '✓ On' : '✗ Off'}
           </button>
         </div>
+      </div>
+
+      {/* Overclock Mode Selector */}
+      <div className="flex flex-col items-center gap-2 w-full">
+        <label className="text-purple-400 text-xs font-medium uppercase tracking-widest">
+          Overclocks
+        </label>
+        <button
+          onClick={cycleOverclockMode}
+          className={`px-6 py-3 rounded-lg font-medium transition-all min-w-[140px] active:scale-95
+            border-2 uppercase tracking-wide text-sm
+            ${overclockMode
+              ? `${currentOCMode.color} text-white shadow-lg`
+              : 'bg-drg-darker/50 text-gray-400 border-gray-700 hover:border-purple-500/50 hover:text-white'
+            }`}
+        >
+          <span className="mr-2">{currentOCMode.icon}</span>
+          {currentOCMode.label}
+        </button>
+        {overclockMode && (
+          <p className="text-xs text-gray-500 text-center">
+            {overclockMode === 'balanced' && 'Safe, reliable picks'}
+            {overclockMode === 'meta' && 'Strong community favorites'}
+            {overclockMode === 'unhinged' && 'Maximum chaos'}
+          </p>
+        )}
       </div>
 
       {/* Player Names */}

@@ -1,0 +1,60 @@
+{
+  "categories": [
+    { "id": "swarmClear", "name": "Swarm Clear", "icon": "🪲" },
+    { "id": "singleTarget", "name": "Single Target", "icon": "🎯" },
+    { "id": "mobility", "name": "Mobility", "icon": "💨" },
+    { "id": "utility", "name": "Utility", "icon": "🔧" }
+  ],
+  "weapons": {
+    "Deepcore GK2": { "swarmClear": 2, "singleTarget": 1, "mobility": 2, "utility": 1 },
+    "M1000 Classic": { "swarmClear": 0, "singleTarget": 3, "mobility": 1, "utility": 1 },
+    "DRAK-25 Plasma Carbine": { "swarmClear": 3, "singleTarget": 1, "mobility": 2, "utility": 1 },
+    "Jury-Rigged Boomstick": { "swarmClear": 2, "singleTarget": 2, "mobility": 3, "utility": 0 },
+    "Zhukov NUK17": { "swarmClear": 3, "singleTarget": 1, "mobility": 2, "utility": 0 },
+    "Nishanka Boltshark X-80": { "swarmClear": 1, "singleTarget": 3, "mobility": 1, "utility": 2 },
+
+    "\"Lead Storm\" Powered Minigun": { "swarmClear": 3, "singleTarget": 3, "mobility": 0, "utility": 0 },
+    "\"Thunderhead\" Heavy Autocannon": { "swarmClear": 3, "singleTarget": 2, "mobility": 0, "utility": 1 },
+    "\"Hurricane\" Guided Rocket System": { "swarmClear": 2, "singleTarget": 3, "mobility": 1, "utility": 1 },
+    "\"Bulldog\" Heavy Revolver": { "swarmClear": 0, "singleTarget": 3, "mobility": 1, "utility": 1 },
+    "BRT7 Burst Fire Gun": { "swarmClear": 2, "singleTarget": 2, "mobility": 2, "utility": 0 },
+    "ArmsKore Coil Gun": { "swarmClear": 1, "singleTarget": 3, "mobility": 0, "utility": 2 },
+
+    "\"Warthog\" Auto 210": { "swarmClear": 2, "singleTarget": 2, "mobility": 1, "utility": 0 },
+    "\"Stubby\" Voltaic SMG": { "swarmClear": 3, "singleTarget": 1, "mobility": 1, "utility": 2 },
+    "LOK-1 Smart Rifle": { "swarmClear": 3, "singleTarget": 2, "mobility": 1, "utility": 2 },
+    "Deepcore 40mm PGL": { "swarmClear": 3, "singleTarget": 2, "mobility": 0, "utility": 1 },
+    "Breach Cutter": { "swarmClear": 3, "singleTarget": 2, "mobility": 0, "utility": 1 },
+    "Shard Diffractor": { "swarmClear": 2, "singleTarget": 3, "mobility": 0, "utility": 1 },
+
+    "CRSPR Flamethrower": { "swarmClear": 3, "singleTarget": 1, "mobility": 1, "utility": 2 },
+    "Cryo Cannon": { "swarmClear": 3, "singleTarget": 1, "mobility": 0, "utility": 3 },
+    "Corrosive Sludge Pump": { "swarmClear": 3, "singleTarget": 2, "mobility": 0, "utility": 2 },
+    "Subata 120": { "swarmClear": 1, "singleTarget": 2, "mobility": 2, "utility": 0 },
+    "Experimental Plasma Charger": { "swarmClear": 2, "singleTarget": 3, "mobility": 1, "utility": 2 },
+    "Colette Wave Cooker": { "swarmClear": 3, "singleTarget": 1, "mobility": 1, "utility": 2 }
+  },
+  "grenades": {
+    "Inhibitor-Field Generator": { "swarmClear": 2, "singleTarget": 0, "mobility": 0, "utility": 3 },
+    "Cryo Grenade": { "swarmClear": 2, "singleTarget": 1, "mobility": 0, "utility": 3 },
+    "Pheromone Canister": { "swarmClear": 3, "singleTarget": 0, "mobility": 0, "utility": 3 },
+
+    "Sticky Grenade": { "swarmClear": 1, "singleTarget": 3, "mobility": 0, "utility": 0 },
+    "Incendiary Grenade": { "swarmClear": 3, "singleTarget": 1, "mobility": 0, "utility": 1 },
+    "Cluster Grenade": { "swarmClear": 3, "singleTarget": 1, "mobility": 0, "utility": 0 },
+
+    "L.U.R.E.": { "swarmClear": 2, "singleTarget": 0, "mobility": 1, "utility": 3 },
+    "Plasma Burster": { "swarmClear": 3, "singleTarget": 1, "mobility": 0, "utility": 0 },
+    "Proximity Mine": { "swarmClear": 2, "singleTarget": 2, "mobility": 0, "utility": 2 },
+
+    "Impact Axe": { "swarmClear": 0, "singleTarget": 3, "mobility": 1, "utility": 0 },
+    "High Explosive Grenade": { "swarmClear": 3, "singleTarget": 2, "mobility": 0, "utility": 0 },
+    "Neurotoxin Grenade": { "swarmClear": 3, "singleTarget": 0, "mobility": 0, "utility": 2 }
+  },
+  "traversalTools": {
+    "Grappling Hook": { "swarmClear": 0, "singleTarget": 0, "mobility": 3, "utility": 2 },
+    "Zipline Launcher": { "swarmClear": 0, "singleTarget": 0, "mobility": 2, "utility": 3 },
+    "Platform Gun": { "swarmClear": 0, "singleTarget": 0, "mobility": 2, "utility": 3 },
+    "Reinforced Power Drills": { "swarmClear": 1, "singleTarget": 0, "mobility": 3, "utility": 3 }
+  }
+}

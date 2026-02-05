@@ -1,6 +1,6 @@
 import PlayerCard from './PlayerCard';
 
-function ResultsDisplay({ loadouts, onRerollSlot, onRerollClass, onRerollArchetype }) {
+function ResultsDisplay({ loadouts, onRerollSlot, onRerollClass, onRerollArchetype, onRerollOverclock }) {
   if (!loadouts || loadouts.length === 0) {
     return null;
   }
@@ -25,6 +25,7 @@ function ResultsDisplay({ loadouts, onRerollSlot, onRerollClass, onRerollArchety
             onRerollSlot={(slotType) => onRerollSlot(loadout.id, slotType)}
             onRerollClass={() => onRerollClass(loadout.id)}
             onRerollArchetype={() => onRerollArchetype(loadout.id)}
+            onRerollOverclock={(slotType) => onRerollOverclock(loadout.id, slotType)}
           />
         ))}
       </div>

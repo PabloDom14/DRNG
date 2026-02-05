@@ -1,50 +1,94 @@
-function SlotItem({ label, item, onReroll, canReroll = true }) {
-  const { name, icon } = typeof item === 'object' ? item : { name: item, icon: null };
+const OVERCLOCK_TIER_STYLES = {
+  balanced: { color: 'text-green-400', bg: 'bg-green-500/20', border: 'border-green-500/30' },
+  meta: { color: 'text-yellow-400', bg: 'bg-yellow-500/20', border: 'border-yellow-500/30' },
+  unhinged: { color: 'text-pink-400', bg: 'bg-pink-500/20', border: 'border-pink-500/30' },
+};
+
+function OverclockBadge({ overclock, onReroll }) {
+  if (!overclock) return null;
+
+  const tierStyle = OVERCLOCK_TIER_STYLES[overclock.tier] || OVERCLOCK_TIER_STYLES.balanced;
 
   return (
     <button
-      type="button"
-      onClick={canReroll ? onReroll : undefined}
-      disabled={!canReroll}
-      className={`flex items-center gap-3 p-3 rounded-lg transition-all text-left min-h-[70px]
-        border border-transparent
-        ${canReroll
-          ? 'hover:bg-white/5 hover:border-drg-orange/30 cursor-pointer active:scale-[0.98] slot-glow'
-          : 'opacity-60 cursor-default'
-        }`}
-      aria-label={canReroll ? `Reroll ${label}` : label}
+      onClick={(e) => {
+        e.stopPropagation();
+        onReroll();
+      }}
+      className={`mt-1 px-2 py-1 rounded text-xs font-medium flex items-center gap-1
+        ${tierStyle.bg} ${tierStyle.border} border ${tierStyle.color}
+        hover:brightness-125 transition-all`}
+      title="Click to reroll overclock"
     >
-      {icon && (
-        <div className="weapon-icon flex-shrink-0">
-          <img
-            src={icon}
-            alt=""
-            className="w-12 h-12 object-contain"
-            loading="lazy"
-          />
-        </div>
-      )}
-      <div className="flex flex-col gap-1 min-w-0">
-        <span className="text-[10px] text-drg-orange/70 uppercase tracking-wider font-medium">
-          {label}
-        </span>
-        <span className="text-sm font-medium text-white/90 leading-tight">{name}</span>
-      </div>
-      {canReroll && (
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          className="h-4 w-4 ml-auto text-gray-600 flex-shrink-0"
-          viewBox="0 0 20 20"
-          fill="currentColor"
-        >
-          <path
-            fillRule="evenodd"
-            d="M4 2a1 1 0 011 1v2.101a7.002 7.002 0 0111.601 2.566 1 1 0 11-1.885.666A5.002 5.002 0 005.999 7H9a1 1 0 010 2H4a1 1 0 01-1-1V3a1 1 0 011-1zm.008 9.057a1 1 0 011.276.61A5.002 5.002 0 0014.001 13H11a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0v-2.101a7.002 7.002 0 01-11.601-2.566 1 1 0 01.61-1.276z"
-            clipRule="evenodd"
-          />
-        </svg>
-      )}
+      <span className="uppercase tracking-wide">{overclock.name}</span>
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        className="h-3 w-3 opacity-60"
+        viewBox="0 0 20 20"
+        fill="currentColor"
+      >
+        <path
+          fillRule="evenodd"
+          d="M4 2a1 1 0 011 1v2.101a7.002 7.002 0 0111.601 2.566 1 1 0 11-1.885.666A5.002 5.002 0 005.999 7H9a1 1 0 010 2H4a1 1 0 01-1-1V3a1 1 0 011-1zm.008 9.057a1 1 0 011.276.61A5.002 5.002 0 0014.001 13H11a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0v-2.101a7.002 7.002 0 01-11.601-2.566 1 1 0 01.61-1.276z"
+          clipRule="evenodd"
+        />
+      </svg>
     </button>
+  );
+}
+
+function SlotItem({ label, item, onReroll, canReroll = true, overclock = null, onRerollOverclock = null }) {
+  const { name, icon } = typeof item === 'object' ? item : { name: item, icon: null };
+
+  return (
+    <div className="flex flex-col">
+      <button
+        type="button"
+        onClick={canReroll ? onReroll : undefined}
+        disabled={!canReroll}
+        className={`flex items-center gap-3 p-3 rounded-lg transition-all text-left min-h-[70px]
+          border border-transparent
+          ${canReroll
+            ? 'hover:bg-white/5 hover:border-drg-orange/30 cursor-pointer active:scale-[0.98] slot-glow'
+            : 'opacity-60 cursor-default'
+          }`}
+        aria-label={canReroll ? `Reroll ${label}` : label}
+      >
+        {icon && (
+          <div className="weapon-icon flex-shrink-0">
+            <img
+              src={icon}
+              alt=""
+              className="w-12 h-12 object-contain"
+              loading="lazy"
+            />
+          </div>
+        )}
+        <div className="flex flex-col gap-1 min-w-0">
+          <span className="text-[10px] text-drg-orange/70 uppercase tracking-wider font-medium">
+            {label}
+          </span>
+          <span className="text-sm font-medium text-white/90 leading-tight">{name}</span>
+          {overclock && onRerollOverclock && (
+            <OverclockBadge overclock={overclock} onReroll={onRerollOverclock} />
+          )}
+        </div>
+        {canReroll && (
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="h-4 w-4 ml-auto text-gray-600 flex-shrink-0"
+            viewBox="0 0 20 20"
+            fill="currentColor"
+          >
+            <path
+              fillRule="evenodd"
+              d="M4 2a1 1 0 011 1v2.101a7.002 7.002 0 0111.601 2.566 1 1 0 11-1.885.666A5.002 5.002 0 005.999 7H9a1 1 0 010 2H4a1 1 0 01-1-1V3a1 1 0 011-1zm.008 9.057a1 1 0 011.276.61A5.002 5.002 0 0014.001 13H11a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0v-2.101a7.002 7.002 0 01-11.601-2.566 1 1 0 01.61-1.276z"
+              clipRule="evenodd"
+            />
+          </svg>
+        )}
+      </button>
+    </div>
   );
 }
 
@@ -85,7 +129,7 @@ function ArchetypeBadge({ archetype, description, onReroll }) {
   );
 }
 
-function PlayerCard({ loadout, onRerollSlot, onRerollClass, onRerollArchetype }) {
+function PlayerCard({ loadout, onRerollSlot, onRerollClass, onRerollArchetype, onRerollOverclock }) {
   const {
     playerName,
     class: classInfo,
@@ -94,7 +138,9 @@ function PlayerCard({ loadout, onRerollSlot, onRerollClass, onRerollArchetype })
     primary,
     secondary,
     grenade,
-    traversalTool
+    traversalTool,
+    primaryOverclock,
+    secondaryOverclock
   } = loadout;
 
   return (
@@ -157,11 +203,15 @@ function PlayerCard({ loadout, onRerollSlot, onRerollClass, onRerollArchetype })
           label="Primary"
           item={primary}
           onReroll={() => onRerollSlot('primary')}
+          overclock={primaryOverclock}
+          onRerollOverclock={() => onRerollOverclock('primary')}
         />
         <SlotItem
           label="Secondary"
           item={secondary}
           onReroll={() => onRerollSlot('secondary')}
+          overclock={secondaryOverclock}
+          onRerollOverclock={() => onRerollOverclock('secondary')}
         />
         <SlotItem
           label="Grenade"

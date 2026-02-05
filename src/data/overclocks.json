@@ -1,0 +1,200 @@
+{
+  "modes": [
+    { "id": "balanced", "name": "Balanced", "icon": "⚖️", "color": "#4CAF50", "description": "Safe, reliable picks" },
+    { "id": "meta", "name": "Meta", "icon": "🏆", "color": "#FFC600", "description": "Strong community favorites" },
+    { "id": "unhinged", "name": "Unhinged", "icon": "🤪", "color": "#E91E63", "description": "Maximum chaos" }
+  ],
+  "overclocks": {
+    "Deepcore GK2": [
+      { "name": "Homebrew Powder", "tier": "balanced" },
+      { "name": "Overclocked Firing Mechanism", "tier": "balanced" },
+      { "name": "Bullets of Mercy", "tier": "meta" },
+      { "name": "AI Stability Engine", "tier": "balanced" },
+      { "name": "Electrifying Reload", "tier": "unhinged" }
+    ],
+    "M1000 Classic": [
+      { "name": "Hoverclock", "tier": "unhinged" },
+      { "name": "Minimal Clips", "tier": "balanced" },
+      { "name": "Active Stability System", "tier": "meta" },
+      { "name": "Hipster", "tier": "meta" },
+      { "name": "Supercooling Chamber", "tier": "unhinged" }
+    ],
+    "DRAK-25 Plasma Carbine": [
+      { "name": "Aggressive Venting", "tier": "unhinged" },
+      { "name": "Thermal Liquid Coolant", "tier": "balanced" },
+      { "name": "Impact Deflection", "tier": "balanced" },
+      { "name": "Rewiring Mod", "tier": "meta" },
+      { "name": "Overtuned Particle Accelerator", "tier": "meta" },
+      { "name": "Shield Battery Booster", "tier": "unhinged" }
+    ],
+    "Jury-Rigged Boomstick": [
+      { "name": "Compact Shells", "tier": "balanced" },
+      { "name": "Double Barrel", "tier": "meta" },
+      { "name": "Special Powder", "tier": "unhinged" },
+      { "name": "Stuffed Shells", "tier": "meta" },
+      { "name": "Shaped Shells", "tier": "balanced" },
+      { "name": "Jumbo Shells", "tier": "unhinged" }
+    ],
+    "Zhukov NUK17": [
+      { "name": "Minimal Magazines", "tier": "balanced" },
+      { "name": "Custom Casings", "tier": "balanced" },
+      { "name": "Cryo Minelets", "tier": "meta" },
+      { "name": "Embedded Detonators", "tier": "unhinged" },
+      { "name": "Gas Recycling", "tier": "meta" }
+    ],
+    "Nishanka Boltshark X-80": [
+      { "name": "Quick Fire", "tier": "balanced" },
+      { "name": "The Specialist", "tier": "meta" },
+      { "name": "Cryo Bolt", "tier": "balanced" },
+      { "name": "Fire Bolt", "tier": "balanced" },
+      { "name": "Bodkin Points", "tier": "meta" },
+      { "name": "Trifork Volley", "tier": "unhinged" }
+    ],
+    "\"Lead Storm\" Powered Minigun": [
+      { "name": "A Little More Oomph!", "tier": "balanced" },
+      { "name": "Thinned Drum Walls", "tier": "balanced" },
+      { "name": "Burning Hell", "tier": "meta" },
+      { "name": "Compact Feed Mechanism", "tier": "balanced" },
+      { "name": "Exhaust Vectoring", "tier": "unhinged" },
+      { "name": "Bullet Hell", "tier": "meta" },
+      { "name": "Lead Storm", "tier": "unhinged" }
+    ],
+    "\"Thunderhead\" Heavy Autocannon": [
+      { "name": "Composite Drums", "tier": "balanced" },
+      { "name": "Splintering Shells", "tier": "balanced" },
+      { "name": "Carpet Bomber", "tier": "meta" },
+      { "name": "Combat Mobility", "tier": "balanced" },
+      { "name": "Big Bertha", "tier": "meta" },
+      { "name": "Neurotoxin Payload", "tier": "unhinged" }
+    ],
+    "\"Hurricane\" Guided Rocket System": [
+      { "name": "Manual Guidance Cutoff", "tier": "balanced" },
+      { "name": "Overtuned Feed Mechanism", "tier": "balanced" },
+      { "name": "Fragmentation Missiles", "tier": "balanced" },
+      { "name": "Plasma Burster Missiles", "tier": "meta" },
+      { "name": "Jet Fuel Homebrew", "tier": "meta" },
+      { "name": "Salvo Module", "tier": "unhinged" }
+    ],
+    "\"Bulldog\" Heavy Revolver": [
+      { "name": "Chain Hit", "tier": "balanced" },
+      { "name": "Homebrew Powder", "tier": "balanced" },
+      { "name": "Volatile Bullets", "tier": "unhinged" },
+      { "name": "Six Shooter", "tier": "meta" },
+      { "name": "Elephant Rounds", "tier": "meta" },
+      { "name": "Magic Bullets", "tier": "unhinged" }
+    ],
+    "BRT7 Burst Fire Gun": [
+      { "name": "Composite Casings", "tier": "balanced" },
+      { "name": "Full Chamber Seal", "tier": "balanced" },
+      { "name": "Compact Mags", "tier": "balanced" },
+      { "name": "Experimental Rounds", "tier": "meta" },
+      { "name": "Electro Minelets", "tier": "meta" },
+      { "name": "Lead Spray", "tier": "unhinged" }
+    ],
+    "ArmsKore Coil Gun": [
+      { "name": "Re-atomizer", "tier": "balanced" },
+      { "name": "Ultra-Magnetic Coils", "tier": "balanced" },
+      { "name": "Backfeeding Module", "tier": "meta" },
+      { "name": "The Mole", "tier": "unhinged" },
+      { "name": "Hellfire", "tier": "meta" },
+      { "name": "Triple-Tech Chambers", "tier": "unhinged" }
+    ],
+    "\"Warthog\" Auto 210": [
+      { "name": "Stunner", "tier": "balanced" },
+      { "name": "Light-Weight Magazines", "tier": "balanced" },
+      { "name": "Magnetic Pellet Alignment", "tier": "meta" },
+      { "name": "Cycle Overload", "tier": "meta" },
+      { "name": "Mini Shells", "tier": "unhinged" }
+    ],
+    "\"Stubby\" Voltaic SMG": [
+      { "name": "Super-Slim Rounds", "tier": "balanced" },
+      { "name": "Well Oiled Machine", "tier": "balanced" },
+      { "name": "EM Refire Booster", "tier": "meta" },
+      { "name": "Light-Weight Rounds", "tier": "balanced" },
+      { "name": "Turret Arc", "tier": "unhinged" },
+      { "name": "Turret EM Discharge", "tier": "meta" }
+    ],
+    "LOK-1 Smart Rifle": [
+      { "name": "Armor Break Module", "tier": "balanced" },
+      { "name": "Eraser", "tier": "meta" },
+      { "name": "Executioner", "tier": "meta" },
+      { "name": "Neuro-Lasso", "tier": "unhinged" },
+      { "name": "ECM Hack", "tier": "balanced" },
+      { "name": "Seeker Rounds", "tier": "unhinged" }
+    ],
+    "Deepcore 40mm PGL": [
+      { "name": "Clean Sweep", "tier": "balanced" },
+      { "name": "Pack Rat", "tier": "balanced" },
+      { "name": "Compact Rounds", "tier": "balanced" },
+      { "name": "RJ250 Compound", "tier": "unhinged" },
+      { "name": "Fat Boy", "tier": "meta" },
+      { "name": "Hyper Propellant", "tier": "meta" }
+    ],
+    "Breach Cutter": [
+      { "name": "Light-Weight Cases", "tier": "balanced" },
+      { "name": "Roll Control", "tier": "balanced" },
+      { "name": "Stronger Plasma Current", "tier": "balanced" },
+      { "name": "Return to Sender", "tier": "unhinged" },
+      { "name": "High Voltage Crossover", "tier": "meta" },
+      { "name": "Spinning Death", "tier": "meta" },
+      { "name": "Inferno", "tier": "unhinged" }
+    ],
+    "Shard Diffractor": [
+      { "name": "Efficiency Tweaks", "tier": "balanced" },
+      { "name": "Automated Beam Controller", "tier": "balanced" },
+      { "name": "Feedback Loop", "tier": "meta" },
+      { "name": "Volatile Impact Reactor", "tier": "meta" },
+      { "name": "Plastcrete Catalyst", "tier": "unhinged" },
+      { "name": "Overdrive Booster", "tier": "unhinged" }
+    ],
+    "CRSPR Flamethrower": [
+      { "name": "Lighter Tanks", "tier": "balanced" },
+      { "name": "Sticky Additive", "tier": "balanced" },
+      { "name": "Compact Feed Valves", "tier": "balanced" },
+      { "name": "Fuel Stream Diffuser", "tier": "meta" },
+      { "name": "Face Melter", "tier": "meta" },
+      { "name": "Sticky Fuel", "tier": "unhinged" }
+    ],
+    "Cryo Cannon": [
+      { "name": "Improved Thermal Efficiency", "tier": "balanced" },
+      { "name": "Tuned Cooler", "tier": "balanced" },
+      { "name": "Flow Rate Expansion", "tier": "balanced" },
+      { "name": "Ice Spear", "tier": "meta" },
+      { "name": "Ice Storm", "tier": "meta" },
+      { "name": "Snowball", "tier": "unhinged" }
+    ],
+    "Corrosive Sludge Pump": [
+      { "name": "Hydrogen Ion Additive", "tier": "balanced" },
+      { "name": "AG Mixture", "tier": "balanced" },
+      { "name": "Disperser Compound", "tier": "meta" },
+      { "name": "Goo Bomber Special", "tier": "meta" },
+      { "name": "Sludge Blast", "tier": "unhinged" },
+      { "name": "Volatile Impact Mixture", "tier": "unhinged" }
+    ],
+    "Subata 120": [
+      { "name": "Chain Hit", "tier": "balanced" },
+      { "name": "Homebrew Powder", "tier": "balanced" },
+      { "name": "Oversized Magazine", "tier": "balanced" },
+      { "name": "Automatic Fire", "tier": "meta" },
+      { "name": "Explosive Reload", "tier": "unhinged" },
+      { "name": "Tranquilizer Rounds", "tier": "meta" }
+    ],
+    "Experimental Plasma Charger": [
+      { "name": "Energy Rerouting", "tier": "balanced" },
+      { "name": "Magnetic Cooling Unit", "tier": "balanced" },
+      { "name": "Heat Pipe", "tier": "balanced" },
+      { "name": "Heavy Hitter", "tier": "meta" },
+      { "name": "Overcharger", "tier": "meta" },
+      { "name": "Persistent Plasma", "tier": "unhinged" },
+      { "name": "Thin Containment Field", "tier": "unhinged" }
+    ],
+    "Colette Wave Cooker": [
+      { "name": "Liquid Cooling System", "tier": "balanced" },
+      { "name": "Super Focus Lens", "tier": "balanced" },
+      { "name": "Diffusion Ray", "tier": "meta" },
+      { "name": "Mega Power Supply", "tier": "meta" },
+      { "name": "Blistering Necrosis", "tier": "unhinged" },
+      { "name": "Gamma Contamination", "tier": "unhinged" }
+    ]
+  }
+}
