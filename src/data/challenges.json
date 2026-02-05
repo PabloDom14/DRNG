@@ -1,0 +1,148 @@
+{
+  "challenges": [
+    {
+      "id": "no-resupply-solo",
+      "text": "No solo resupply calls - team must agree",
+      "icon": "📦",
+      "difficulty": "medium",
+      "type": "team"
+    },
+    {
+      "id": "secondary-first",
+      "text": "Complete secondary objective before primary",
+      "icon": "🎯",
+      "difficulty": "medium",
+      "type": "team"
+    },
+    {
+      "id": "no-bunker",
+      "text": "No bunkering - keep moving!",
+      "icon": "🏃",
+      "difficulty": "hard",
+      "type": "team"
+    },
+    {
+      "id": "lights-out",
+      "text": "Flares only - no permanent lights",
+      "icon": "🔦",
+      "difficulty": "hard",
+      "type": "team"
+    },
+    {
+      "id": "iron-dwarf",
+      "text": "One player cannot be revived (Iron Dwarf mode)",
+      "icon": "💀",
+      "difficulty": "hard",
+      "type": "player"
+    },
+    {
+      "id": "no-platforms",
+      "text": "Engineer cannot use platforms for mining",
+      "icon": "🚫",
+      "difficulty": "medium",
+      "type": "class",
+      "class": "engineer"
+    },
+    {
+      "id": "no-ziplines",
+      "text": "Gunner cannot place ziplines until swarm",
+      "icon": "🚠",
+      "difficulty": "medium",
+      "type": "class",
+      "class": "gunner"
+    },
+    {
+      "id": "grapple-cooldown",
+      "text": "Scout must wait 5 seconds between grapples",
+      "icon": "⏱️",
+      "difficulty": "medium",
+      "type": "class",
+      "class": "scout"
+    },
+    {
+      "id": "drill-eco",
+      "text": "Driller can only drill for objectives, not shortcuts",
+      "icon": "⛏️",
+      "difficulty": "medium",
+      "type": "class",
+      "class": "driller"
+    },
+    {
+      "id": "ammo-conscious",
+      "text": "No resupply until at least 2 dwarves need ammo",
+      "icon": "🎒",
+      "difficulty": "easy",
+      "type": "team"
+    },
+    {
+      "id": "stick-together",
+      "text": "Stay within 30m of each other at all times",
+      "icon": "🤝",
+      "difficulty": "medium",
+      "type": "team"
+    },
+    {
+      "id": "no-grenades",
+      "text": "One random player cannot use grenades",
+      "icon": "💣",
+      "difficulty": "medium",
+      "type": "player"
+    },
+    {
+      "id": "call-targets",
+      "text": "Must ping high-value targets before attacking",
+      "icon": "📍",
+      "difficulty": "easy",
+      "type": "team"
+    },
+    {
+      "id": "last-dwarf",
+      "text": "Last dwarf standing must clutch - no intentional deaths",
+      "icon": "🦸",
+      "difficulty": "easy",
+      "type": "team"
+    },
+    {
+      "id": "mineral-hoarder",
+      "text": "One player must carry all Nitra to the M.U.L.E.",
+      "icon": "💎",
+      "difficulty": "easy",
+      "type": "player"
+    },
+    {
+      "id": "speedrun",
+      "text": "Complete mission in under 15 minutes",
+      "icon": "⚡",
+      "difficulty": "hard",
+      "type": "team"
+    },
+    {
+      "id": "protect-greenbeard",
+      "text": "One player is the 'greenbeard' - protect them at all costs",
+      "icon": "🌱",
+      "difficulty": "medium",
+      "type": "player"
+    },
+    {
+      "id": "primary-only",
+      "text": "One random player can only use primary weapon",
+      "icon": "🔫",
+      "difficulty": "hard",
+      "type": "player"
+    },
+    {
+      "id": "no-kiting",
+      "text": "No kiting bugs - stand your ground",
+      "icon": "🛡️",
+      "difficulty": "hard",
+      "type": "team"
+    },
+    {
+      "id": "molly-escort",
+      "text": "One dwarf must stay within 10m of Molly at all times",
+      "icon": "🤖",
+      "difficulty": "medium",
+      "type": "player"
+    }
+  ]
+}

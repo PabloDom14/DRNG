@@ -2,15 +2,18 @@ import { useState, useCallback } from 'react';
 import PlayerInput from './components/PlayerInput';
 import GenerateButton from './components/GenerateButton';
 import ResultsDisplay from './components/ResultsDisplay';
+import ChallengeDisplay from './components/ChallengeDisplay';
 import RerollAnimation from './components/RerollAnimation';
-import { generateRun, rerollSlot, rerollClass, rerollArchetype } from './utils/randomizer';
+import { generateRun, rerollSlot, rerollClass, rerollArchetype, selectChallenges, rerollChallenges } from './utils/randomizer';
 
 function App() {
   const [playerCount, setPlayerCount] = useState(4);
   const [allowDuplicates, setAllowDuplicates] = useState(false);
   const [useArchetypes, setUseArchetypes] = useState(false);
+  const [useChallenges, setUseChallenges] = useState(false);
   const [playerNames, setPlayerNames] = useState(['', '', '', '']);
   const [loadouts, setLoadouts] = useState([]);
+  const [challenges, setChallenges] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [isFadingOut, setIsFadingOut] = useState(false);
   const [showResults, setShowResults] = useState(false);
@@ -21,20 +24,27 @@ function App() {
     );
     const newLoadouts = generateRun(playerCount, allowDuplicates, names, useArchetypes);
     setLoadouts(newLoadouts);
-  }, [playerCount, allowDuplicates, playerNames, useArchetypes]);
+
+    // Generate challenges if enabled
+    if (useChallenges) {
+      const challengeCount = Math.floor(Math.random() * 2) + 1; // 1-2 challenges
+      const newChallenges = selectChallenges(challengeCount, newLoadouts);
+      setChallenges(newChallenges);
+    } else {
+      setChallenges([]);
+    }
+  }, [playerCount, allowDuplicates, playerNames, useArchetypes, useChallenges]);
 
   const handleGenerate = () => {
-    // Show loading animation
     setIsLoading(true);
     setIsFadingOut(false);
     setShowResults(false);
     setLoadouts([]);
+    setChallenges([]);
 
-    // Start fade out, then show results
     setTimeout(() => {
       setIsFadingOut(true);
 
-      // After fade out completes, show results
       setTimeout(() => {
         doGenerate();
         setIsLoading(false);
@@ -69,6 +79,23 @@ function App() {
     );
   };
 
+  const handleRerollChallenge = (index) => {
+    const newChallenges = rerollChallenges(1, loadouts, challenges);
+    if (newChallenges.length > 0) {
+      setChallenges(current => {
+        const updated = [...current];
+        updated[index] = newChallenges[0];
+        return updated;
+      });
+    }
+  };
+
+  const handleRerollAllChallenges = () => {
+    const challengeCount = challenges.length || 2;
+    const newChallenges = selectChallenges(challengeCount, loadouts);
+    setChallenges(newChallenges);
+  };
+
   return (
     <div className="min-h-screen text-white flex flex-col items-center px-4 py-8 sm:py-12">
       {/* Header */}
@@ -97,6 +124,8 @@ function App() {
             setAllowDuplicates={setAllowDuplicates}
             useArchetypes={useArchetypes}
             setUseArchetypes={setUseArchetypes}
+            useChallenges={useChallenges}
+            setUseChallenges={setUseChallenges}
             playerNames={playerNames}
             setPlayerNames={setPlayerNames}
           />
@@ -112,7 +141,15 @@ function App() {
       {isLoading ? (
         <RerollAnimation fadeOut={isFadingOut} />
       ) : (
-        <div className={showResults ? 'animate-fade-in' : ''}>
+        <div className={showResults ? 'animate-fade-in w-full flex flex-col items-center' : 'w-full flex flex-col items-center'}>
+          {/* Challenges */}
+          <ChallengeDisplay
+            challenges={challenges}
+            onRerollChallenge={handleRerollChallenge}
+            onRerollAll={handleRerollAllChallenges}
+          />
+
+          {/* Loadouts */}
           <ResultsDisplay
             loadouts={loadouts}
             onRerollSlot={handleRerollSlot}

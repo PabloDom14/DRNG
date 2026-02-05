@@ -1,6 +1,19 @@
+import { useEffect, useRef } from 'react';
+
 function RerollAnimation({ fadeOut }) {
+  const ref = useRef(null);
+
+  useEffect(() => {
+    if (ref.current) {
+      ref.current.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+  }, []);
+
   return (
-    <div className={`w-full max-w-5xl flex items-center justify-center py-12 transition-opacity duration-300 ${fadeOut ? 'opacity-0' : 'opacity-100'}`}>
+    <div
+      ref={ref}
+      className={`w-full max-w-5xl flex items-center justify-center py-16 transition-opacity duration-300 ${fadeOut ? 'opacity-0' : 'opacity-100'}`}
+    >
       <img
         src="/rock-and-stone.gif"
         alt="Loading..."

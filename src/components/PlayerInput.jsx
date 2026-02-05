@@ -5,6 +5,8 @@ function PlayerInput({
   setAllowDuplicates,
   useArchetypes,
   setUseArchetypes,
+  useChallenges,
+  setUseChallenges,
   playerNames,
   setPlayerNames
 }) {
@@ -39,8 +41,8 @@ function PlayerInput({
         </div>
       </div>
 
-      {/* Toggle Row: Duplicates & Archetypes */}
-      <div className="flex flex-col sm:flex-row gap-4 items-center justify-center w-full">
+      {/* Toggle Row: Duplicates, Archetypes & Challenges */}
+      <div className="flex flex-wrap gap-4 items-center justify-center w-full">
         {/* Duplicate Toggle */}
         <div className="flex flex-col items-center gap-2">
           <label className="text-drg-yellow text-xs font-medium uppercase tracking-widest">
@@ -48,7 +50,7 @@ function PlayerInput({
           </label>
           <button
             onClick={() => setAllowDuplicates(!allowDuplicates)}
-            className={`px-5 py-3 rounded-lg font-medium transition-all min-w-[110px] active:scale-95
+            className={`px-4 py-3 rounded-lg font-medium transition-all min-w-[100px] active:scale-95
               border-2 uppercase tracking-wide text-sm
               ${allowDuplicates
                 ? 'bg-drg-orange text-drg-darker border-drg-yellow shadow-lg shadow-drg-orange/40'
@@ -66,7 +68,7 @@ function PlayerInput({
           </label>
           <button
             onClick={() => setUseArchetypes(!useArchetypes)}
-            className={`px-5 py-3 rounded-lg font-medium transition-all min-w-[110px] active:scale-95
+            className={`px-4 py-3 rounded-lg font-medium transition-all min-w-[100px] active:scale-95
               border-2 uppercase tracking-wide text-sm
               ${useArchetypes
                 ? 'bg-drg-orange text-drg-darker border-drg-yellow shadow-lg shadow-drg-orange/40'
@@ -74,6 +76,24 @@ function PlayerInput({
               }`}
           >
             {useArchetypes ? '✓ On' : '✗ Off'}
+          </button>
+        </div>
+
+        {/* Challenges Toggle */}
+        <div className="flex flex-col items-center gap-2">
+          <label className="text-red-400 text-xs font-medium uppercase tracking-widest">
+            Challenges
+          </label>
+          <button
+            onClick={() => setUseChallenges(!useChallenges)}
+            className={`px-4 py-3 rounded-lg font-medium transition-all min-w-[100px] active:scale-95
+              border-2 uppercase tracking-wide text-sm
+              ${useChallenges
+                ? 'bg-red-500 text-white border-red-400 shadow-lg shadow-red-500/40'
+                : 'bg-drg-darker/50 text-gray-400 border-gray-700 hover:border-red-500/50 hover:text-white'
+              }`}
+          >
+            {useChallenges ? '✓ On' : '✗ Off'}
           </button>
         </div>
       </div>

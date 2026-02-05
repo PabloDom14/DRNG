@@ -1,5 +1,6 @@
 import classData from '../data/classes.json';
 import archetypeData from '../data/archetypes.json';
+import challengeData from '../data/challenges.json';
 
 /**
  * Shuffle array using Fisher-Yates algorithm
@@ -209,4 +210,80 @@ export function rerollArchetype(loadout) {
   };
 }
 
-export { classData, archetypeData };
+/**
+ * Select random challenges for the run
+ * @param {number} count - Number of challenges to select (1-3)
+ * @param {Array} loadouts - Current loadouts to assign player-specific challenges
+ * @returns {Array} Array of selected challenges with assigned players if applicable
+ */
+export function selectChallenges(count = 2, loadouts = []) {
+  const challenges = challengeData.challenges;
+  const shuffled = shuffle([...challenges]);
+  const selected = shuffled.slice(0, count);
+
+  return selected.map(challenge => {
+    const result = { ...challenge };
+
+    // Assign a random player for player-specific challenges
+    if (challenge.type === 'player' && loadouts.length > 0) {
+      const randomPlayer = randomPick(loadouts);
+      result.assignedPlayer = randomPlayer.playerName;
+    }
+
+    // Check if class-specific challenge applies
+    if (challenge.type === 'class' && loadouts.length > 0) {
+      const matchingPlayer = loadouts.find(l => l.class.id === challenge.class);
+      if (matchingPlayer) {
+        result.assignedPlayer = matchingPlayer.playerName;
+      } else {
+        // Class not in party, skip this challenge type
+        result.skipped = true;
+      }
+    }
+
+    return result;
+  }).filter(c => !c.skipped);
+}
+
+/**
+ * Reroll challenges
+ * @param {number} count - Number of challenges to select
+ * @param {Array} loadouts - Current loadouts
+ * @param {Array} currentChallenges - Current challenges to avoid duplicates
+ * @returns {Array} New array of challenges
+ */
+export function rerollChallenges(count, loadouts, currentChallenges = []) {
+  const challenges = challengeData.challenges;
+  const currentIds = currentChallenges.map(c => c.id);
+  const available = challenges.filter(c => !currentIds.includes(c.id));
+
+  if (available.length < count) {
+    // Not enough unique challenges, just get new random ones
+    return selectChallenges(count, loadouts);
+  }
+
+  const shuffled = shuffle([...available]);
+  const selected = shuffled.slice(0, count);
+
+  return selected.map(challenge => {
+    const result = { ...challenge };
+
+    if (challenge.type === 'player' && loadouts.length > 0) {
+      const randomPlayer = randomPick(loadouts);
+      result.assignedPlayer = randomPlayer.playerName;
+    }
+
+    if (challenge.type === 'class' && loadouts.length > 0) {
+      const matchingPlayer = loadouts.find(l => l.class.id === challenge.class);
+      if (matchingPlayer) {
+        result.assignedPlayer = matchingPlayer.playerName;
+      } else {
+        result.skipped = true;
+      }
+    }
+
+    return result;
+  }).filter(c => !c.skipped);
+}
+
+export { classData, archetypeData, challengeData };
