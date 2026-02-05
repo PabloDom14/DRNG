@@ -2,6 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: 'Danger Flight';
+  src: url('/fonts/DangerFlight.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
   --glow-orange: rgba(252, 158, 0, 0.6);
   --glow-yellow: rgba(255, 198, 0, 0.4);
