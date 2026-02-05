@@ -89,7 +89,7 @@ function TeamAnalysis({ loadouts }) {
       <div className="flex items-center gap-4 mb-4">
         <div className="h-px flex-1 bg-gradient-to-r from-transparent via-drg-yellow/30 to-transparent" />
         <h2 className="font-drg text-drg-yellow text-lg tracking-widest uppercase">
-          Team Analysis
+          Team Stats
         </h2>
         <div className="h-px flex-1 bg-gradient-to-r from-transparent via-drg-yellow/30 to-transparent" />
       </div>
