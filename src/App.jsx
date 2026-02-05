@@ -116,10 +116,10 @@ function App() {
         >
           DEEP ROCK
         </h1>
-        <h2 className="font-drg drg-title-sub text-xl sm:text-2xl md:text-3xl tracking-[0.3em] mb-4">
+        <h2 className="drg-title-sub text-xl sm:text-2xl md:text-3xl tracking-[0.3em] mb-4">
           NUMBER GENERATOR
         </h2>
-        <p className="font-drg drg-title-sub text-lg sm:text-xl tracking-[0.2em]">
+        <p className="drg-title-sub text-lg sm:text-xl tracking-[0.2em]">
           ROCK AND STONE!
         </p>
       </header>
