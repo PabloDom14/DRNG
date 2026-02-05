@@ -1,4 +1,5 @@
 import classData from '../data/classes.json';
+import archetypeData from '../data/archetypes.json';
 
 /**
  * Shuffle array using Fisher-Yates algorithm
@@ -29,14 +30,51 @@ function randomPickExcluding(array, excludeName) {
 }
 
 /**
+ * Get weapons that match an archetype for a class/slot
+ */
+function getArchetypeWeapons(classId, slotType, archetype, weapons) {
+  const weaponMappings = archetypeData.weaponArchetypes[classId]?.[slotType];
+  if (!weaponMappings) return weapons;
+
+  const matchingWeapons = weapons.filter(weapon => {
+    const archetypes = weaponMappings[weapon.name] || [];
+    return archetypes.includes(archetype.id);
+  });
+
+  // If no weapons match, return all weapons as fallback
+  return matchingWeapons.length > 0 ? matchingWeapons : weapons;
+}
+
+/**
  * Generate a loadout for a single class
  */
-function generateLoadout(classInfo) {
+function generateLoadout(classInfo, archetype = null) {
+  let primary, secondary, grenade;
+
+  if (archetype) {
+    // Filter weapons by archetype
+    const primaryWeapons = getArchetypeWeapons(classInfo.id, 'primary', archetype, classInfo.primaryWeapons);
+    const secondaryWeapons = getArchetypeWeapons(classInfo.id, 'secondary', archetype, classInfo.secondaryWeapons);
+    const grenades = getArchetypeWeapons(classInfo.id, 'grenade', archetype, classInfo.grenades);
+
+    primary = randomPick(primaryWeapons);
+    secondary = randomPick(secondaryWeapons);
+    grenade = randomPick(grenades);
+  } else {
+    primary = randomPick(classInfo.primaryWeapons);
+    secondary = randomPick(classInfo.secondaryWeapons);
+    grenade = randomPick(classInfo.grenades);
+  }
+
   return {
     class: classInfo,
-    primary: randomPick(classInfo.primaryWeapons),
-    secondary: randomPick(classInfo.secondaryWeapons),
-    grenade: randomPick(classInfo.grenades),
+    archetype: archetype,
+    archetypeDescription: archetype
+      ? archetypeData.classArchetypeDescriptions[classInfo.id]?.[archetype.id] || archetype.description
+      : null,
+    primary,
+    secondary,
+    grenade,
     traversalTool: classInfo.traversalTool,
   };
 }
@@ -46,26 +84,33 @@ function generateLoadout(classInfo) {
  * @param {number} playerCount - Number of players (1-4)
  * @param {boolean} allowDuplicates - Whether to allow duplicate classes
  * @param {Array} playerNames - Array of player names
+ * @param {boolean} useArchetypes - Whether to assign archetypes
  * @returns {Array} Array of player loadouts
  */
-export function generateRun(playerCount, allowDuplicates, playerNames = []) {
+export function generateRun(playerCount, allowDuplicates, playerNames = [], useArchetypes = false) {
   const classes = classData.classes;
+  const archetypes = archetypeData.archetypes;
   let selectedClasses;
 
   if (allowDuplicates) {
-    // Pick random classes, duplicates allowed
     selectedClasses = Array.from({ length: playerCount }, () => randomPick(classes));
   } else {
-    // Shuffle and take first N classes (no duplicates)
     selectedClasses = shuffle(classes).slice(0, playerCount);
   }
 
-  return selectedClasses.map((classInfo, index) => ({
-    id: `player-${index}`,
-    playerNumber: index + 1,
-    playerName: playerNames[index] || `Player ${index + 1}`,
-    ...generateLoadout(classInfo),
-  }));
+  // Shuffle archetypes for variety
+  const shuffledArchetypes = shuffle(archetypes);
+
+  return selectedClasses.map((classInfo, index) => {
+    const archetype = useArchetypes ? shuffledArchetypes[index % shuffledArchetypes.length] : null;
+
+    return {
+      id: `player-${index}`,
+      playerNumber: index + 1,
+      playerName: playerNames[index] || `Player ${index + 1}`,
+      ...generateLoadout(classInfo, archetype),
+    };
+  });
 }
 
 /**
@@ -76,22 +121,31 @@ export function generateRun(playerCount, allowDuplicates, playerNames = []) {
  */
 export function rerollSlot(loadout, slotType) {
   const classInfo = loadout.class;
+  const archetype = loadout.archetype;
   const currentValue = loadout[slotType];
 
-  let newValue;
+  let weaponPool;
   switch (slotType) {
     case 'primary':
-      newValue = randomPickExcluding(classInfo.primaryWeapons, currentValue.name);
+      weaponPool = archetype
+        ? getArchetypeWeapons(classInfo.id, 'primary', archetype, classInfo.primaryWeapons)
+        : classInfo.primaryWeapons;
       break;
     case 'secondary':
-      newValue = randomPickExcluding(classInfo.secondaryWeapons, currentValue.name);
+      weaponPool = archetype
+        ? getArchetypeWeapons(classInfo.id, 'secondary', archetype, classInfo.secondaryWeapons)
+        : classInfo.secondaryWeapons;
       break;
     case 'grenade':
-      newValue = randomPickExcluding(classInfo.grenades, currentValue.name);
+      weaponPool = archetype
+        ? getArchetypeWeapons(classInfo.id, 'grenade', archetype, classInfo.grenades)
+        : classInfo.grenades;
       break;
     default:
       return loadout;
   }
+
+  const newValue = randomPickExcluding(weaponPool, currentValue.name);
 
   return {
     ...loadout,
@@ -112,10 +166,8 @@ export function rerollClass(loadout, currentLoadouts, allowDuplicates) {
 
   let availableClasses;
   if (allowDuplicates) {
-    // Can pick any class except current one
     availableClasses = classes.filter(c => c.id !== currentClassId);
   } else {
-    // Can only pick classes not used by other players
     const usedClassIds = currentLoadouts
       .filter(l => l.id !== loadout.id)
       .map(l => l.class.id);
@@ -124,16 +176,37 @@ export function rerollClass(loadout, currentLoadouts, allowDuplicates) {
     );
   }
 
-  // If no available classes (e.g., all 4 used), just pick a different one
   if (availableClasses.length === 0) {
     availableClasses = classes.filter(c => c.id !== currentClassId);
   }
 
   const newClass = randomPick(availableClasses);
+
+  // Keep the same archetype if one was assigned
   return {
     ...loadout,
-    ...generateLoadout(newClass),
+    ...generateLoadout(newClass, loadout.archetype),
   };
 }
 
-export { classData };
+/**
+ * Reroll the archetype for a player
+ * @param {Object} loadout - The current loadout
+ * @returns {Object} New loadout with different archetype and matching weapons
+ */
+export function rerollArchetype(loadout) {
+  if (!loadout.archetype) return loadout;
+
+  const archetypes = archetypeData.archetypes;
+  const currentArchetypeId = loadout.archetype.id;
+
+  const availableArchetypes = archetypes.filter(a => a.id !== currentArchetypeId);
+  const newArchetype = randomPick(availableArchetypes);
+
+  return {
+    ...loadout,
+    ...generateLoadout(loadout.class, newArchetype),
+  };
+}
+
+export { classData, archetypeData };

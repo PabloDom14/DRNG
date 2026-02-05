@@ -78,6 +78,61 @@ button {
     0 0 20px var(--glow-yellow);
 }
 
+/* DRG Logo Style Title - 3D Effect */
+.drg-title-main {
+  color: #FC9E00;
+  text-shadow:
+    /* Inner highlight */
+    0 -2px 0 #FFD700,
+    /* 3D extrusion layers */
+    1px 1px 0 #C45C00,
+    2px 2px 0 #A34D00,
+    3px 3px 0 #8B4000,
+    4px 4px 0 #6B3000,
+    5px 5px 0 #4A2000,
+    6px 6px 0 #301500,
+    /* Soft shadow beneath */
+    8px 8px 4px rgba(0, 0, 0, 0.5),
+    10px 10px 10px rgba(0, 0, 0, 0.4),
+    /* Outer glow */
+    0 0 20px rgba(252, 158, 0, 0.6),
+    0 0 40px rgba(252, 158, 0, 0.4),
+    0 0 60px rgba(252, 158, 0, 0.2);
+  position: relative;
+}
+
+/* Gradient overlay for metallic sheen */
+.drg-title-main::before {
+  content: attr(data-text);
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    180deg,
+    #FFE44D 0%,
+    #FFC600 20%,
+    #FC9E00 50%,
+    #E85D00 80%,
+    #C44D00 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  z-index: 1;
+}
+
+.drg-title-sub {
+  background: linear-gradient(180deg, #FFFFFF 0%, #B0B0B0 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.3))
+          drop-shadow(1px 1px 0 rgba(0, 0, 0, 0.5));
+  letter-spacing: 0.3em;
+}
+
 /* Button glow on hover */
 .btn-glow {
   position: relative;
@@ -164,6 +219,26 @@ input:focus {
 @keyframes spin-once {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
+}
+
+/* Fade in animation */
+@keyframes fade-in {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.4s ease-out forwards;
+}
+
+/* Fade out animation */
+@keyframes fade-out {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+
+.animate-fade-out {
+  animation: fade-out 0.3s ease-out forwards;
 }
 
 .reroll-spin:active svg {

@@ -48,8 +48,54 @@ function SlotItem({ label, item, onReroll, canReroll = true }) {
   );
 }
 
-function PlayerCard({ loadout, onRerollSlot, onRerollClass }) {
-  const { playerName, class: classInfo, primary, secondary, grenade, traversalTool } = loadout;
+function ArchetypeBadge({ archetype, description, onReroll }) {
+  return (
+    <div className="mb-4 p-3 rounded-lg bg-gradient-to-r from-black/30 to-transparent border-l-2"
+         style={{ borderLeftColor: archetype.color }}>
+      <div className="flex items-center justify-between mb-1">
+        <button
+          onClick={onReroll}
+          className="flex items-center gap-2 hover:opacity-80 transition-opacity"
+        >
+          <span className="text-lg">{archetype.icon}</span>
+          <span
+            className="font-drg text-sm tracking-wide"
+            style={{ color: archetype.color }}
+          >
+            {archetype.name}
+          </span>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="h-3 w-3 text-gray-500"
+            viewBox="0 0 20 20"
+            fill="currentColor"
+          >
+            <path
+              fillRule="evenodd"
+              d="M4 2a1 1 0 011 1v2.101a7.002 7.002 0 0111.601 2.566 1 1 0 11-1.885.666A5.002 5.002 0 005.999 7H9a1 1 0 010 2H4a1 1 0 01-1-1V3a1 1 0 011-1zm.008 9.057a1 1 0 011.276.61A5.002 5.002 0 0014.001 13H11a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0v-2.101a7.002 7.002 0 01-11.601-2.566 1 1 0 01.61-1.276z"
+              clipRule="evenodd"
+            />
+          </svg>
+        </button>
+      </div>
+      <p className="text-xs text-gray-400 italic leading-relaxed">
+        "{description}"
+      </p>
+    </div>
+  );
+}
+
+function PlayerCard({ loadout, onRerollSlot, onRerollClass, onRerollArchetype }) {
+  const {
+    playerName,
+    class: classInfo,
+    archetype,
+    archetypeDescription,
+    primary,
+    secondary,
+    grenade,
+    traversalTool
+  } = loadout;
 
   return (
     <div
@@ -95,6 +141,15 @@ function PlayerCard({ loadout, onRerollSlot, onRerollClass }) {
           </svg>
         </button>
       </div>
+
+      {/* Archetype Badge (if enabled) */}
+      {archetype && (
+        <ArchetypeBadge
+          archetype={archetype}
+          description={archetypeDescription}
+          onReroll={onRerollArchetype}
+        />
+      )}
 
       {/* Loadout Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-1">

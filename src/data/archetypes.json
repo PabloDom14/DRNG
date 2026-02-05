@@ -1,0 +1,144 @@
+{
+  "archetypes": [
+    {
+      "id": "crowd-control",
+      "name": "Crowd Control",
+      "icon": "❄️",
+      "color": "#64B5F6",
+      "description": "Freeze, burn, or slow swarms while your team cleans up.",
+      "shortDesc": "Swarm stopper"
+    },
+    {
+      "id": "single-target",
+      "name": "Single-Target DPS",
+      "icon": "🎯",
+      "color": "#EF5350",
+      "description": "Focus down high-value targets and delete Dreadnoughts.",
+      "shortDesc": "Boss killer"
+    },
+    {
+      "id": "area-denial",
+      "name": "Area Denial",
+      "icon": "🔥",
+      "color": "#FF7043",
+      "description": "Control zones and punish bugs for stepping into your territory.",
+      "shortDesc": "Zone controller"
+    },
+    {
+      "id": "mobility",
+      "name": "Mobility",
+      "icon": "💨",
+      "color": "#4FC3F7",
+      "description": "Speed demon. Get in, get out, leave chaos behind.",
+      "shortDesc": "Speed freak"
+    },
+    {
+      "id": "support",
+      "name": "Support",
+      "icon": "🛡️",
+      "color": "#81C784",
+      "description": "Keep the team alive and make everyone else better.",
+      "shortDesc": "Team player"
+    }
+  ],
+  "weaponArchetypes": {
+    "scout": {
+      "primary": {
+        "Deepcore GK2": ["crowd-control", "mobility"],
+        "M1000 Classic": ["single-target"],
+        "DRAK-25 Plasma Carbine": ["crowd-control", "area-denial"]
+      },
+      "secondary": {
+        "Jury-Rigged Boomstick": ["single-target", "mobility"],
+        "Zhukov NUK17": ["crowd-control", "mobility"],
+        "Nishanka Boltshark X-80": ["single-target", "support"]
+      },
+      "grenade": {
+        "Inhibitor-Field Generator": ["crowd-control", "support"],
+        "Cryo Grenade": ["crowd-control", "support"],
+        "Pheromone Canister": ["crowd-control", "support"]
+      }
+    },
+    "gunner": {
+      "primary": {
+        "\"Lead Storm\" Powered Minigun": ["crowd-control", "single-target"],
+        "\"Thunderhead\" Heavy Autocannon": ["crowd-control", "area-denial"],
+        "\"Hurricane\" Guided Rocket System": ["area-denial", "single-target"]
+      },
+      "secondary": {
+        "\"Bulldog\" Heavy Revolver": ["single-target"],
+        "BRT7 Burst Fire Gun": ["crowd-control", "mobility"],
+        "ArmsKore Coil Gun": ["single-target", "area-denial"]
+      },
+      "grenade": {
+        "Sticky Grenade": ["single-target"],
+        "Incendiary Grenade": ["area-denial", "crowd-control"],
+        "Cluster Grenade": ["crowd-control", "area-denial"]
+      }
+    },
+    "engineer": {
+      "primary": {
+        "\"Warthog\" Auto 210": ["single-target", "crowd-control"],
+        "\"Stubby\" Voltaic SMG": ["crowd-control", "support"],
+        "LOK-1 Smart Rifle": ["crowd-control", "support"]
+      },
+      "secondary": {
+        "Deepcore 40mm PGL": ["area-denial", "crowd-control"],
+        "Breach Cutter": ["crowd-control", "area-denial"],
+        "Shard Diffractor": ["single-target", "area-denial"]
+      },
+      "grenade": {
+        "L.U.R.E.": ["support", "crowd-control"],
+        "Plasma Burster": ["area-denial", "crowd-control"],
+        "Proximity Mine": ["area-denial", "single-target"]
+      }
+    },
+    "driller": {
+      "primary": {
+        "CRSPR Flamethrower": ["area-denial", "crowd-control"],
+        "Cryo Cannon": ["crowd-control", "support"],
+        "Corrosive Sludge Pump": ["area-denial", "crowd-control"]
+      },
+      "secondary": {
+        "Subata 120": ["single-target", "mobility"],
+        "Experimental Plasma Charger": ["area-denial", "single-target"],
+        "Colette Wave Cooker": ["crowd-control", "area-denial"]
+      },
+      "grenade": {
+        "Impact Axe": ["single-target", "mobility"],
+        "High Explosive Grenade": ["area-denial", "crowd-control"],
+        "Neurotoxin Grenade": ["crowd-control", "area-denial"]
+      }
+    }
+  },
+  "classArchetypeDescriptions": {
+    "scout": {
+      "crowd-control": "Light 'em up and slow 'em down. Your team will thank you.",
+      "single-target": "One shot, one kill. High-value targets don't stand a chance.",
+      "area-denial": "Plasma and fire everywhere. Bugs hate this one simple trick.",
+      "mobility": "Fastest dwarf in the caves. Hit and run specialist.",
+      "support": "Keep eyes on threats and mark targets for the team."
+    },
+    "gunner": {
+      "crowd-control": "Wall of lead. Nothing gets through.",
+      "single-target": "Big guns for big bugs. Dreadnought deleter.",
+      "area-denial": "Explosive ordinance expert. Area secured.",
+      "mobility": "Heavy firepower, surprisingly mobile. Zipline to victory.",
+      "support": "Shield up, guns blazing. The team's anchor."
+    },
+    "engineer": {
+      "crowd-control": "Turrets and tech keep the swarm at bay.",
+      "single-target": "Precision explosives for precision problems.",
+      "area-denial": "Platform fortress builder. This is MY cave now.",
+      "mobility": "Efficient pathing and quick repositioning.",
+      "support": "Platforms, turrets, and team utility. The backbone."
+    },
+    "driller": {
+      "crowd-control": "Freeze or burn, pick your poison. Swarms melt.",
+      "single-target": "C4 solves everything. EVERYTHING.",
+      "area-denial": "Toxic, burning, freezing zones. Enter at your own risk.",
+      "mobility": "Drill straight to the objective. No detours.",
+      "support": "Create paths and control the battlefield for your team."
+    }
+  }
+}

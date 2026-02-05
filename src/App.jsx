@@ -1,21 +1,46 @@
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 import PlayerInput from './components/PlayerInput';
 import GenerateButton from './components/GenerateButton';
 import ResultsDisplay from './components/ResultsDisplay';
-import { generateRun, rerollSlot, rerollClass } from './utils/randomizer';
+import RerollAnimation from './components/RerollAnimation';
+import { generateRun, rerollSlot, rerollClass, rerollArchetype } from './utils/randomizer';
 
 function App() {
   const [playerCount, setPlayerCount] = useState(4);
   const [allowDuplicates, setAllowDuplicates] = useState(false);
+  const [useArchetypes, setUseArchetypes] = useState(false);
   const [playerNames, setPlayerNames] = useState(['', '', '', '']);
   const [loadouts, setLoadouts] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [isFadingOut, setIsFadingOut] = useState(false);
+  const [showResults, setShowResults] = useState(false);
 
-  const handleGenerate = () => {
+  const doGenerate = useCallback(() => {
     const names = playerNames.slice(0, playerCount).map(
       (name, i) => name.trim() || `Player ${i + 1}`
     );
-    const newLoadouts = generateRun(playerCount, allowDuplicates, names);
+    const newLoadouts = generateRun(playerCount, allowDuplicates, names, useArchetypes);
     setLoadouts(newLoadouts);
+  }, [playerCount, allowDuplicates, playerNames, useArchetypes]);
+
+  const handleGenerate = () => {
+    // Show loading animation
+    setIsLoading(true);
+    setIsFadingOut(false);
+    setShowResults(false);
+    setLoadouts([]);
+
+    // Start fade out, then show results
+    setTimeout(() => {
+      setIsFadingOut(true);
+
+      // After fade out completes, show results
+      setTimeout(() => {
+        doGenerate();
+        setIsLoading(false);
+        setShowResults(true);
+      }, 300);
+    }, 600);
   };
 
   const handleRerollSlot = (playerId, slotType) => {
@@ -36,25 +61,29 @@ function App() {
     );
   };
 
+  const handleRerollArchetype = (playerId) => {
+    setLoadouts((current) =>
+      current.map((loadout) =>
+        loadout.id === playerId ? rerollArchetype(loadout) : loadout
+      )
+    );
+  };
+
   return (
     <div className="min-h-screen text-white flex flex-col items-center px-4 py-8 sm:py-12">
       {/* Header */}
       <header className="text-center mb-10">
-        <h1 className="font-drg text-drg-orange mb-3 tracking-wide text-glow-orange">
-          <span className="text-5xl sm:text-6xl md:text-7xl">D</span>
-          <span className="text-2xl sm:text-3xl md:text-4xl">eep</span>
-          {' '}
-          <span className="text-5xl sm:text-6xl md:text-7xl">R</span>
-          <span className="text-2xl sm:text-3xl md:text-4xl">andom</span>
-          {' '}
-          <span className="text-5xl sm:text-6xl md:text-7xl">N</span>
-          <span className="text-2xl sm:text-3xl md:text-4xl">umber</span>
-          {' '}
-          <span className="text-5xl sm:text-6xl md:text-7xl">G</span>
-          <span className="text-2xl sm:text-3xl md:text-4xl">enerator</span>
+        <h1
+          className="font-drg drg-title-main text-5xl sm:text-6xl md:text-7xl lg:text-8xl tracking-wider mb-1"
+          data-text="DEEP ROCK"
+        >
+          DEEP ROCK
         </h1>
-        <p className="font-drg text-drg-yellow text-xl sm:text-2xl tracking-wider text-glow-yellow">
-          Rock and Stone!
+        <h2 className="font-drg drg-title-sub text-xl sm:text-2xl md:text-3xl tracking-[0.3em] mb-4">
+          NUMBER GENERATOR
+        </h2>
+        <p className="font-drg drg-title-sub text-lg sm:text-xl tracking-[0.2em]">
+          ROCK AND STONE!
         </p>
       </header>
 
@@ -66,26 +95,36 @@ function App() {
             setPlayerCount={setPlayerCount}
             allowDuplicates={allowDuplicates}
             setAllowDuplicates={setAllowDuplicates}
+            useArchetypes={useArchetypes}
+            setUseArchetypes={setUseArchetypes}
             playerNames={playerNames}
             setPlayerNames={setPlayerNames}
           />
           <GenerateButton
             onClick={handleGenerate}
             hasResults={loadouts.length > 0}
+            isLoading={isLoading}
           />
         </div>
       </div>
 
-      {/* Results */}
-      <ResultsDisplay
-        loadouts={loadouts}
-        onRerollSlot={handleRerollSlot}
-        onRerollClass={handleRerollClass}
-      />
+      {/* Loading Animation or Results */}
+      {isLoading ? (
+        <RerollAnimation fadeOut={isFadingOut} />
+      ) : (
+        <div className={showResults ? 'animate-fade-in' : ''}>
+          <ResultsDisplay
+            loadouts={loadouts}
+            onRerollSlot={handleRerollSlot}
+            onRerollClass={handleRerollClass}
+            onRerollArchetype={handleRerollArchetype}
+          />
+        </div>
+      )}
 
       {/* Footer hint */}
-      {loadouts.length > 0 && (
-        <p className="text-gray-500 text-sm mt-8 text-center">
+      {loadouts.length > 0 && !isLoading && (
+        <p className={`text-gray-500 text-sm mt-8 text-center ${showResults ? 'animate-fade-in' : ''}`}>
           Tap any weapon or grenade to reroll just that slot
         </p>
       )}
