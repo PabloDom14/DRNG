@@ -1,0 +1,212 @@
+{
+  "classes": [
+    {
+      "id": "scout",
+      "name": "Scout",
+      "color": "#2196F3",
+      "icon": "https://deeprockgalactic.wiki.gg/images/Scout_icon.png",
+      "primaryWeapons": [
+        {
+          "name": "Deepcore GK2",
+          "icon": "https://deeprockgalactic.wiki.gg/images/thumb/Assault-rifle.png/200px-Assault-rifle.png"
+        },
+        {
+          "name": "M1000 Classic",
+          "icon": "https://deeprockgalactic.wiki.gg/images/thumb/M1000.png/200px-M1000.png"
+        },
+        {
+          "name": "DRAK-25 Plasma Carbine",
+          "icon": "https://deeprockgalactic.wiki.gg/images/thumb/Drak.png/200px-Drak.png"
+        }
+      ],
+      "secondaryWeapons": [
+        {
+          "name": "Jury-Rigged Boomstick",
+          "icon": "https://deeprockgalactic.wiki.gg/images/thumb/Sawedoff-shotgun.png/200px-Sawedoff-shotgun.png"
+        },
+        {
+          "name": "Zhukov NUK17",
+          "icon": "https://deeprockgalactic.wiki.gg/images/thumb/Dual_machine_pistols.png/200px-Dual_machine_pistols.png"
+        },
+        {
+          "name": "Nishanka Boltshark X-80",
+          "icon": "https://deeprockgalactic.wiki.gg/images/thumb/Crossbow.png/200px-Crossbow.png"
+        }
+      ],
+      "grenades": [
+        {
+          "name": "Inhibitor-Field Generator",
+          "icon": "https://deeprockgalactic.wiki.gg/images/thumb/Grenade_ifg.png/150px-Grenade_ifg.png"
+        },
+        {
+          "name": "Cryo Grenade",
+          "icon": "https://deeprockgalactic.wiki.gg/images/thumb/Grenade_freeze.png/150px-Grenade_freeze.png"
+        },
+        {
+          "name": "Pheromone Canister",
+          "icon": "https://deeprockgalactic.wiki.gg/images/thumb/Grenade_pheromone.png/150px-Grenade_pheromone.png"
+        }
+      ],
+      "traversalTool": {
+        "name": "Grappling Hook",
+        "icon": "https://deeprockgalactic.wiki.gg/images/thumb/Grappling-gun.png/200px-Grappling-gun.png"
+      }
+    },
+    {
+      "id": "gunner",
+      "name": "Gunner",
+      "color": "#4CAF50",
+      "icon": "https://deeprockgalactic.wiki.gg/images/Gunner_icon.png",
+      "primaryWeapons": [
+        {
+          "name": "\"Lead Storm\" Powered Minigun",
+          "icon": "https://deeprockgalactic.wiki.gg/images/thumb/Gatling-gun.png/200px-Gatling-gun.png"
+        },
+        {
+          "name": "\"Thunderhead\" Heavy Autocannon",
+          "icon": "https://deeprockgalactic.wiki.gg/images/thumb/Autocannon.png/200px-Autocannon.png"
+        },
+        {
+          "name": "\"Hurricane\" Guided Rocket System",
+          "icon": "https://deeprockgalactic.wiki.gg/images/thumb/Hurricane.png/200px-Hurricane.png"
+        }
+      ],
+      "secondaryWeapons": [
+        {
+          "name": "\"Bulldog\" Heavy Revolver",
+          "icon": "https://deeprockgalactic.wiki.gg/images/thumb/Revolver.png/200px-Revolver.png"
+        },
+        {
+          "name": "BRT7 Burst Fire Gun",
+          "icon": "https://deeprockgalactic.wiki.gg/images/thumb/Burst_pistol.png/200px-Burst_pistol.png"
+        },
+        {
+          "name": "ArmsKore Coil Gun",
+          "icon": "https://deeprockgalactic.wiki.gg/images/thumb/Coilgun.png/200px-Coilgun.png"
+        }
+      ],
+      "grenades": [
+        {
+          "name": "Sticky Grenade",
+          "icon": "https://deeprockgalactic.wiki.gg/images/thumb/Grenade_sticky.png/150px-Grenade_sticky.png"
+        },
+        {
+          "name": "Incendiary Grenade",
+          "icon": "https://deeprockgalactic.wiki.gg/images/thumb/Grenade_incendiary.png/150px-Grenade_incendiary.png"
+        },
+        {
+          "name": "Cluster Grenade",
+          "icon": "https://deeprockgalactic.wiki.gg/images/thumb/Grenade_cluster.png/150px-Grenade_cluster.png"
+        }
+      ],
+      "traversalTool": {
+        "name": "Zipline Launcher",
+        "icon": "https://deeprockgalactic.wiki.gg/images/thumb/Zipline-gun.png/200px-Zipline-gun.png"
+      }
+    },
+    {
+      "id": "engineer",
+      "name": "Engineer",
+      "color": "#FF9800",
+      "icon": "https://deeprockgalactic.wiki.gg/images/Engineer_icon.png",
+      "primaryWeapons": [
+        {
+          "name": "\"Warthog\" Auto 210",
+          "icon": "https://deeprockgalactic.wiki.gg/images/thumb/Shotgun.png/200px-Shotgun.png"
+        },
+        {
+          "name": "\"Stubby\" Voltaic SMG",
+          "icon": "https://deeprockgalactic.wiki.gg/images/thumb/Voltaic_smg.png/200px-Voltaic_smg.png"
+        },
+        {
+          "name": "LOK-1 Smart Rifle",
+          "icon": "https://deeprockgalactic.wiki.gg/images/thumb/Lok-1.png/200px-Lok-1.png"
+        }
+      ],
+      "secondaryWeapons": [
+        {
+          "name": "Deepcore 40mm PGL",
+          "icon": "https://deeprockgalactic.wiki.gg/images/thumb/Grenade-launcher.png/200px-Grenade-launcher.png"
+        },
+        {
+          "name": "Breach Cutter",
+          "icon": "https://deeprockgalactic.wiki.gg/images/thumb/Breach_cutter.png/200px-Breach_cutter.png"
+        },
+        {
+          "name": "Shard Diffractor",
+          "icon": "https://deeprockgalactic.wiki.gg/images/thumb/Shard.png/200px-Shard.png"
+        }
+      ],
+      "grenades": [
+        {
+          "name": "L.U.R.E.",
+          "icon": "https://deeprockgalactic.wiki.gg/images/thumb/Grenade_lure.png/150px-Grenade_lure.png"
+        },
+        {
+          "name": "Plasma Burster",
+          "icon": "https://deeprockgalactic.wiki.gg/images/thumb/Grenade_plasma.png/150px-Grenade_plasma.png"
+        },
+        {
+          "name": "Proximity Mine",
+          "icon": "https://deeprockgalactic.wiki.gg/images/thumb/Grenade_proximity.png/150px-Grenade_proximity.png"
+        }
+      ],
+      "traversalTool": {
+        "name": "Platform Gun",
+        "icon": "https://deeprockgalactic.wiki.gg/images/thumb/Platform-gun.png/200px-Platform-gun.png"
+      }
+    },
+    {
+      "id": "driller",
+      "name": "Driller",
+      "color": "#F44336",
+      "icon": "https://deeprockgalactic.wiki.gg/images/Driller_icon.png",
+      "primaryWeapons": [
+        {
+          "name": "CRSPR Flamethrower",
+          "icon": "https://deeprockgalactic.wiki.gg/images/thumb/Flamethrower.png/200px-Flamethrower.png"
+        },
+        {
+          "name": "Cryo Cannon",
+          "icon": "https://deeprockgalactic.wiki.gg/images/thumb/Cryo_cannon.png/200px-Cryo_cannon.png"
+        },
+        {
+          "name": "Corrosive Sludge Pump",
+          "icon": "https://deeprockgalactic.wiki.gg/images/thumb/Sludge_pump.png/200px-Sludge_pump.png"
+        }
+      ],
+      "secondaryWeapons": [
+        {
+          "name": "Subata 120",
+          "icon": "https://deeprockgalactic.wiki.gg/images/thumb/Pistol.png/200px-Pistol.png"
+        },
+        {
+          "name": "Experimental Plasma Charger",
+          "icon": "https://deeprockgalactic.wiki.gg/images/thumb/Plasma_charger.png/200px-Plasma_charger.png"
+        },
+        {
+          "name": "Colette Wave Cooker",
+          "icon": "https://deeprockgalactic.wiki.gg/images/thumb/Colette.png/200px-Colette.png"
+        }
+      ],
+      "grenades": [
+        {
+          "name": "Impact Axe",
+          "icon": "https://deeprockgalactic.wiki.gg/images/thumb/Grenade_axe.png/150px-Grenade_axe.png"
+        },
+        {
+          "name": "High Explosive Grenade",
+          "icon": "https://deeprockgalactic.wiki.gg/images/thumb/Grenade_he.png/150px-Grenade_he.png"
+        },
+        {
+          "name": "Neurotoxin Grenade",
+          "icon": "https://deeprockgalactic.wiki.gg/images/thumb/Grenade_neurotoxin.png/150px-Grenade_neurotoxin.png"
+        }
+      ],
+      "traversalTool": {
+        "name": "Reinforced Power Drills",
+        "icon": "https://deeprockgalactic.wiki.gg/images/thumb/Drill.png/200px-Drill.png"
+      }
+    }
+  ]
+}
