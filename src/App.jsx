@@ -111,15 +111,15 @@ function App() {
       {/* Header */}
       <header className="text-center mb-10">
         <h1
-          className="font-drg drg-title-main text-5xl sm:text-6xl md:text-7xl lg:text-8xl tracking-wider mb-1"
+          className="font-drg drg-title-main text-5xl sm:text-6xl md:text-7xl lg:text-8xl tracking-wider mb-4"
           data-text="DEEP ROCK"
         >
           DEEP ROCK
         </h1>
-        <h2 className="font-drg drg-title-sub text-xl sm:text-2xl md:text-3xl tracking-[0.3em] mb-4">
+        <h2 className="drg-title-sub text-xl sm:text-2xl md:text-3xl tracking-[0.3em] mb-4">
           NUMBER GENERATOR
         </h2>
-        <p className="font-drg drg-title-sub text-lg sm:text-xl tracking-[0.2em]">
+        <p className="drg-title-sub text-lg sm:text-xl tracking-[0.2em]">
           ROCK AND STONE!
         </p>
       </header>
